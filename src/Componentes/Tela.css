@@ -1,0 +1,9 @@
+.bodyTela {
+    background-color: black;
+    width: 50vw;
+    color: aliceblue;
+}
+
+.historico li {
+    list-style-type: none;
+}
