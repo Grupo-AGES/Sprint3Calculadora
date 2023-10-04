@@ -12,12 +12,14 @@ function App() {
     <>
     <div className='bodyApp'>
       <Header/>
+      <div className='calculos'>
       <div className='botoes'>
      <Numeros/>
      <Operadores/>
      {/* <button onClick={handleClear}>C</button> */}
      </div>
      <Tela/>
+     </div>
      </div>
     </>
   )

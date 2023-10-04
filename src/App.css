@@ -1,5 +1,19 @@
 .bodyApp {
   display:flex;
+  flex-direction: column;
+}
+
+.calculos {
+  display: flex;
+  flex-direction: row;
+}
+
+.bodyTela {
+  display: grid;
+}
+
+.historico {
+  justify-self: end;
 }
 
 .botoes {
