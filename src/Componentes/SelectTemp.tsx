@@ -1,15 +1,27 @@
-import React from 'react'
+import { useState } from "react"
 
-function SelectTemp(props) {
-  const { valorDigitado, valorSelecionado1, valorSelecionado2 } = props
+function SelectTemp() {
+  const [valorSelecionado1, setValorSelecionado1] = useState('celsius')
+  const [valorSelecionado2, setValorSelecionado2] = useState('kelvin')
 
-  if (valorSelecionado1 === 'celsius' && valorSelecionado2 === 'kelvin') {
-    return <div className="resultado">{valorDigitado + 273.15}</div>
-  } else if (valorSelecionado1 === 'celsius' && valorSelecionado2 === 'fahrenheit') {
-    return <div className="resultado">{(valorDigitado * 9 / 5) + 32}</div>
-  } else {
-    return <div className="resultado">Resultado não suportado</div>
-  }
+return(
+<div className='selectTemp'>
+              <select
+                value={valorSelecionado1}
+                onChange={(e) => setValorSelecionado1(e.target.value)}>
+                <option value="celsius">Celsius</option>
+                <option value="fahrenheit">Fahrenheit</option>
+                <option value="kelvin">Kelvin</option>
+              </select>
+              <select
+                value={valorSelecionado2}
+                onChange={(e) => setValorSelecionado2(e.target.value)}>
+                <option value="celsius">Celsius</option>
+                <option value="fahrenheit">Fahrenheit</option>
+                <option value="kelvin">Kelvin</option>
+              </select>
+            </div>
+)
 }
 
 export default SelectTemp
