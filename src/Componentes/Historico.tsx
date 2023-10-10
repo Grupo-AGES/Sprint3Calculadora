@@ -9,7 +9,9 @@ function Historico(props :{
       <div className="bodyHistorico">
           <h3>Histórico</h3>
           <ul>
-            {props.historico}
+while(i<historico.length){
+            {props.historico[i]}
+}
           </ul>
           <img className='lixo' src='/trash.png'></img>
         </div>
