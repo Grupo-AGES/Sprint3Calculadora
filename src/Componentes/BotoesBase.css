@@ -1,4 +1,10 @@
-.numero {
+.bodyBase {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.bodyBotoes {
     background: linear-gradient( rgb(11, 12, 59), rgb(55, 30, 124));
     border-radius: 6px;
     box-shadow: 0px 10px 40px -12px rgb(25, 88, 129);
@@ -7,6 +13,3 @@
     padding: 3px;
 }
 
-.bodyNumero {
-    display: grid;
-}

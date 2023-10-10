@@ -7,3 +7,8 @@
 .historico li {
     list-style-type: none;
 }
+
+.lixo {
+    width: 20px;
+    height: 20px;
+}

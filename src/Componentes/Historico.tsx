@@ -1,14 +1,17 @@
 import './Historico.css'
 
-function Historico() {
+function Historico(props :{
+  historico: String;
+}) {
 
   return (
     <>
       <div className="bodyHistorico">
           <h3>Histórico</h3>
           <ul>
+            {props.historico}
           </ul>
-          <img src='/trash.png'></img>
+          <img className='lixo' src='/trash.png'></img>
         </div>
     </>
   );
