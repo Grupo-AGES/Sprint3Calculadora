@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './BotoesBase.css'
 import Resultado from './Resultado'
 import Historico from './Historico'
@@ -82,6 +82,39 @@ function BotoesBase() {
     setOperator('')
   }
 
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      const keyToValueMap: { [key: string]: string } = {
+        'Digit7': 7,
+        'Digit8': 8,
+        'Digit9': 9,
+        'Digit4': 4,
+        'Digit5': 5,
+        'Digit6': 6,
+        'Digit1': 1,
+        'Digit0': 0,
+        'Digit2': 2,
+        'Digit3': 3,
+        'Period': '.',
+        'Enter': '=',
+        
+      };
+
+      const value = keyToValueMap[event.code];
+      if (value !== undefined) {
+        const input = value;
+    setNum((prevNum) => prevNum === '0' ? input : prevNum + input)
+    setValoresClicados((prevValores) => prevValores + input)
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
   return (
     <div className='bodyBase'>
       <div className="bodyBotoes">
@@ -140,7 +173,7 @@ function BotoesBase() {
           </div>
           <div className='direitaBase'>
           <Resultado resultadoFinal={resultadoFinal}/>
-          <Historico historico={historico}/> 
+         
           {/* arrumar renderizacao historico das contas, atualmente: 6x41-2 */}
       </div>
       </div>
