@@ -1,17 +1,13 @@
-import './Resultado.css'
+function Resultado(props: {
+  resultado: string;
+}) {
+  return (
+    <div>
+      <h1>{props.resultado}</h1>
+    </div>
+  );
+}
 
-function Resultado(props :{
-  calculate: Function;
-}){
-      
-return(
-  <div>
-      <h1
-          onChange={(e) => props.calculate(e.target.value)}
-      />
-  </div>
-)
-      }
 
   //   function Temperatura(props : {
   //       valorDigitado: number,
