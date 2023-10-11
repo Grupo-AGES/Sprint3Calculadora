@@ -1,6 +1,6 @@
-//importando use state(metodo padrão do react)
-import { useState } from 'react'
-//importando o css
+//importando funções padrao react(use effect e use state)
+import { useEffect, useState } from 'react'
+//importando css botoesbase
 import './BotoesBase.css'
 //importando o arquivo Resultado para usar como tag(import Nome que voce quer dar para a tag(por padrão se usa o nome do componete/arquivo correspondente) from 'caminho do arquivo')
 import Resultado from './Resultado'
@@ -102,6 +102,39 @@ function BotoesBase() {
     setResultado(resultado)
     setOperator('')
   }
+ 
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      const keyToValueMap: { [key: string]: string } = {
+        'Digit7': '7',
+        'Digit8': '8',
+        'Digit9': '9',
+        'Digit4': '4',
+        'Digit5': '5',
+        'Digit6': '6',
+        'Digit1': '1',
+        'Digit0': '0',
+        'Digit2': '2',
+        'Digit3': '3',
+        'Period': '.',
+        'Enter': '=',
+        
+      };
+
+      const value = keyToValueMap[event.code];
+      if (value !== undefined) {
+        const input = value;
+    setNum((prevNum) => prevNum === '0' ? input : prevNum + input)
+    setValoresClicados((prevValores) => prevValores + input)
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
 
   //return da função geral do arquivo/componete atual
   return (
@@ -114,47 +147,47 @@ function BotoesBase() {
         <button onClick={clear}>C</button>
         <button onClick={changeSign}>+/-</button>
         <button onClick={porcentage}>%</button>
-        <button className="operador" onClick={operatorHandler} value="÷">
-          ÷
-        </button>
-        <button className="numero" onClick={inputNum} value='7'>
-          7
+        <button className="numero" onClick={inputNum} value='9'>
+          9
         </button>
         <button className="numero" onClick={inputNum} value='8'>
           8
         </button>
-        <button className="numero" onClick={inputNum} value='9'>
-          9
-        </button>
-        <button className="operador" onClick={operatorHandler} value="×">
-          ×
-        </button>
-        <button className="numero" onClick={inputNum} value='4'>
-          4
-        </button>
-        <button className="numero" onClick={inputNum} value='5'>
-          5
+        <button className="numero" onClick={inputNum} value='7'>
+          7
         </button>
         <button className="numero" onClick={inputNum} value='6'>
           6
         </button>
-        <button className="operador" onClick={operatorHandler} value="-">
-          -
+        <button className="numero" onClick={inputNum} value='5'>
+          5
         </button>
-        <button className="numero" onClick={inputNum} value='1'>
-          1
-        </button>
-        <button className="numero" onClick={inputNum} value='2'>
-          2
+        <button className="numero" onClick={inputNum} value='4'>
+          4
         </button>
         <button className="numero" onClick={inputNum} value='3'>
           3
         </button>
-        <button className="operador" onClick={operatorHandler} value="+">
-          +
+        <button className="numero" onClick={inputNum} value='2'>
+          2
+        </button>
+        <button className="numero" onClick={inputNum} value='1'>
+          1
         </button>
         <button className="numero" onClick={inputNum} value='0'>
           0
+        </button>
+        <button className="operador" onClick={operatorHandler} value="×">
+          ×
+        </button>
+        <button className="operador" onClick={operatorHandler} value="÷">
+          ÷
+        </button>
+        <button className="operador" onClick={operatorHandler} value="-">
+          -
+        </button>
+        <button className="operador" onClick={operatorHandler} value="+">
+          +
         </button>
         <button className="numero" onClick={inputNum} value={"."}>
           ,
@@ -162,7 +195,7 @@ function BotoesBase() {
         <button className="operador" onClick={calculate}>
           =
         </button>
-      </div>
+          </div>
       <div className='direitaBase'>
         <Resultado resultado={resultado} />
         <Historico historico={historico} />
