@@ -13,7 +13,7 @@ function BotoesBase() {
   const [oldnum, setOldNum] = useState('0')
   const [operator, setOperator] = useState('')
   const [valoresClicados, setValoresClicados] = useState('')
-  const [historico] = useState([''])
+  const [historico, setHistorico] = useState([''])
   const [resultado, setResultado] = useState('')
 
   //função que é ativada pelo click em algum dos numeros, o e é de event
@@ -38,6 +38,11 @@ function BotoesBase() {
     setOperator('')
     setValoresClicados('')
     setResultado('')
+  }
+
+  //função que limpa o historico
+  function clearHistory() {
+    setHistorico([''])
   }
 
   //função que transforma o numero presente na tela em porcentagem
@@ -217,6 +222,7 @@ function BotoesBase() {
       <div className='direitaBase'>
         <Resultado resultado={resultado} />
         <Historico historico={historico} />
+        <img onClick={clearHistory} className='lixo' src='/trash.png' alt="Trash" />
       </div>
     </div>
   )

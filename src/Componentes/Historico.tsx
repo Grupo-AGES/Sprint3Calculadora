@@ -1,6 +1,7 @@
 function Historico(props: {
   historico: string[];
 }) {
+
   return (
     <>
         <h3 className="tituloHistorico">Histórico</h3>
@@ -10,7 +11,6 @@ function Historico(props: {
             <li className="itemHistorico" key={i}>{item}</li>
           ))}
         </ul>
-        <img className='lixo' src='/trash.png' alt="Trash" />
       </div>
     </>
   );
