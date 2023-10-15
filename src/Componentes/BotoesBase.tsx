@@ -1,7 +1,5 @@
 //importando funções padrao react(use effect e use state)
 import { useEffect, useState } from 'react'
-//importando css botoesbase
-import './BotoesBase.css'
 //importando o arquivo Resultado para usar como tag(import Nome que voce quer dar para a tag(por padrão se usa o nome do componete/arquivo correspondente) from 'caminho do arquivo')
 import Resultado from './Resultado'
 //importando o arquivo Historico para usar como tag(import Nome que voce quer dar para a tag(por padrão se usa o nome do componete/arquivo correspondente) from 'caminho do arquivo')
@@ -118,6 +116,10 @@ function BotoesBase() {
         'Digit3': '3',
         'Period': '.',
         'Enter': '=',
+        'KeyA': '+',
+        'KeyS': '-',
+        'KeyD': '',
+        'Keyx': ''
         
       };
 
@@ -143,11 +145,16 @@ function BotoesBase() {
       {/* por padrão do react, o que esta dentro das tags html entre { } é lido como javascript
       {valoresClicados || '0'} renderiza os valores clicados ou 0 */}
         <h1 className="valoresClicados">{valoresClicados || '0'}</h1>
+        <div className='todosBotoes'>
+        <div className="primeirosBotoes">
+          <div className='linha'>
         {/* quando clicado "onClick", o botão C aciona a função clear */}
-        <button onClick={clear}>C</button>
-        <button onClick={changeSign}>+/-</button>
-        <button onClick={porcentage}>%</button>
-        <button className="numero" onClick={inputNum} value='9'>
+        <button className='outrosBotoes' onClick={clear}>C</button>
+        <button className='outrosBotoes' onClick={changeSign}>+/-</button>
+        <button className='outrosBotoes' onClick={porcentage}>%</button>
+        </div>
+        <div className='linha'>
+        <button className="numero" id='primNum' onClick={inputNum} value='9'>
           9
         </button>
         <button className="numero" onClick={inputNum} value='8'>
@@ -156,6 +163,8 @@ function BotoesBase() {
         <button className="numero" onClick={inputNum} value='7'>
           7
         </button>
+        </div>
+        <div className='linha'>
         <button className="numero" onClick={inputNum} value='6'>
           6
         </button>
@@ -165,6 +174,8 @@ function BotoesBase() {
         <button className="numero" onClick={inputNum} value='4'>
           4
         </button>
+        </div>
+        <div className='linha'>
         <button className="numero" onClick={inputNum} value='3'>
           3
         </button>
@@ -174,9 +185,17 @@ function BotoesBase() {
         <button className="numero" onClick={inputNum} value='1'>
           1
         </button>
+        </div>
+        <div className='linha'>
         <button className="numero" onClick={inputNum} value='0'>
           0
         </button>
+        <button className="numero" onClick={inputNum} value={"."}>
+          ,
+        </button>
+        </div>
+          </div>
+          <div className='ultimosBotoes'>
         <button className="operador" onClick={operatorHandler} value="×">
           ×
         </button>
@@ -189,17 +208,15 @@ function BotoesBase() {
         <button className="operador" onClick={operatorHandler} value="+">
           +
         </button>
-        <button className="numero" onClick={inputNum} value={"."}>
-          ,
-        </button>
-        <button className="operador" onClick={calculate}>
+        <button className="igual" onClick={calculate}>
           =
         </button>
+        </div>
+          </div>
           </div>
       <div className='direitaBase'>
         <Resultado resultado={resultado} />
         <Historico historico={historico} />
-        {/* arrumar renderizacao historico das contas, atualmente: 6x41-2 */}
       </div>
     </div>
   )

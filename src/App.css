@@ -1,24 +1,195 @@
 .bodyApp {
-  display:flex;
+  background: #040C0E;
+  display: flex;
   flex-direction: column;
 }
 
-.calculos {
+.bodyHeader {
+  width: 100vw;
+  height: 90px;
+  flex-shrink: 0;
+  background: #BEBEBE;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.menuLateral {
+  color: #000;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.bodyBase {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.bodyBotoes {
+  width: 60vw;
+  height: 90vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 3vw;
+}
+
+.todosBotoes {
   display: flex;
   flex-direction: row;
 }
 
-.bodyTela {
-  display: grid;
+.primeirosBotoes {
+  display: flex;
+  flex-direction: column;
+}
+
+.linha {
+  height: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.numero,
+.outrosBotoes,
+.operador {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 24px;
+  border: 1px solid #ccc;
+}
+
+.numero {
+  width: 116px;
+  height: 116px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #65805C;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.operador {
+  width: 116px;
+  height: 116px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #132226;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.igual {
+  align-content: center;
+  width: 116px;
+  height: 224px;
+  flex-shrink: 0;
+  background: #DAA520;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.outrosBotoes {
+  width: 116px;
+  height: 116px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #294249;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.valoresClicados {
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: #A8A8A8;
+  color: #000;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.direitaBase {
+  flex-shrink: 0;
+  background: #BEBEBE;
+}
+
+.tituloResultado {
+  width: 138px;
+  color: #000;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.resultado {
+  color: #000;
+  font-family: Inter;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.tituloHistorico {
+  width: 247px;
+  height: 57px;
+  flex-shrink: 0;
+  border-radius: 10px 10px 0px 0px;
+  background: #A8A8A8;
+  width: 117px;
+  color: #000;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .historico {
-  justify-self: end;
+  width: 40vw;
+  height: 60vh;
+  flex-shrink: 0;
+  border-radius: 0px 20px 20px 20px;
+  background: #A8A8A8;
 }
 
-.botoes {
-  background: linear-gradient( rgb(11, 12, 59), rgb(55, 30, 124));
-  width: 100vh;
-  display: flex;
-  flex-wrap: wrap;
+.itensHistorico {
+  color: #424242;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.lixo {
+  size: 25px;
 }

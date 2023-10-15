@@ -3,7 +3,8 @@ function Resultado(props: {
 }) {
   return (
     <div>
-      <h1>{props.resultado}</h1>
+      <h2 className="tituloResultado">Resultado:</h2>
+      <h1 className="resultado">{props.resultado}</h1>
     </div>
   );
 }

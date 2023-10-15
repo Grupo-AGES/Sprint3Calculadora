@@ -1,5 +1,3 @@
-import './HeaderMenu.css'
-
 function HeaderMenu() {
 
   return (

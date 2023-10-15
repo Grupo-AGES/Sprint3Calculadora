@@ -3,9 +3,9 @@ function Historico(props: {
 }) {
   return (
     <>
-      <div className="bodyHistorico">
-        <h3>Histórico</h3>
-        <ul>
+        <h3 className="tituloHistorico">Histórico</h3>
+        <div className="historico">
+        <ul className="itensHistorico">
           {props.historico.map((item, i) => (
             <li key={i}>{item}</li>
           ))}
