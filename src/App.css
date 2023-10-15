@@ -190,6 +190,10 @@
   line-height: normal;
 }
 
+.itemHistorico {
+  list-style: none;
+}
+
 .lixo {
   size: 25px;
 }

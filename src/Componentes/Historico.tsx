@@ -7,7 +7,7 @@ function Historico(props: {
         <div className="historico">
         <ul className="itensHistorico">
           {props.historico.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li className="itemHistorico" key={i}>{item}</li>
           ))}
         </ul>
         <img className='lixo' src='/trash.png' alt="Trash" />
