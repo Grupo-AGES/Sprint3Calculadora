@@ -78,7 +78,6 @@ function BotoesBase() {
   //função que calcula as operações basicas de matematica
   function calculate() {
     let resultado = ''
-    let novaExpressao = ''
       // Encontre o índice do primeiro parêntese de abertura
       const indiceAbertura = valoresClicados.indexOf('(');
     if(indiceAbertura != -1) {
@@ -133,13 +132,7 @@ function BotoesBase() {
     resultado = String(Math.pow(base2, exponent2))
     console.log('deu bom, resultado:', resultado)
     }
-    //   // Substitua a expressão entre parênteses pelo resultado na expressão original
-    //  novaExpressao = valoresClicados.substring(0, indiceAbertura) + resultadoDentro + valoresClicados.substring(indiceFechamento + 1);
-  
-    //   // Avalie a expressão resultante
-    //    resultado = eval(novaExpressao);
   } else {
-   
     //se o operador for divisao, divide
     if (operator === '÷') {
       //salva o resultado da divisão na variavel resultado 
@@ -160,6 +153,12 @@ function BotoesBase() {
     
     if(valoresClicados.includes('%')){
       historico.push('porcentagem de '+parseFloat(num)*100+ ' = '+valoresClicados)
+    }else if(valoresClicados.includes('!')){
+      let stringOriginal =valoresClicados
+let novaString = stringOriginal.substring(0, stringOriginal.lastIndexOf('='));
+console.log(novaString);
+
+      historico.push(novaString )
     }else{
      historico.push(valoresClicados + ' = ' + resultado) 
     }
@@ -188,24 +187,6 @@ function BotoesBase() {
       setNum(novoValoresClicados || '0');
     }
   }  
-
-//   function potencia() {
-
-//   if (oldnum == '0' && num == '0') {
-//       setResultado('0')
-//       setValoresClicados(oldnum + '^'+ num)
-//     }else{
-//       if (operator === '^') {
-//         // Calcula a potência usando a função Math.pow
-//         const resultado = (Math.pow(parseFloat(oldnum), parseFloat(num))).toString();
-  
-//         // Atualiza o visor e os valores clicados
-//         setNum(resultado);
-//         setValoresClicados(oldnum + '^' + num);
-//         setOperator('');
-//       }
-//   }
-// }
   
   function raizQuadrada() {
     if (parseFloat(num) >= 0) {
@@ -239,7 +220,66 @@ function BotoesBase() {
   // }
 }
 
-  
+function calculateFactorial() {
+  const numToFactorial = parseFloat(num);
+
+  // Verifique se o número é um inteiro não negativo
+  if (Number.isInteger(numToFactorial) && numToFactorial >= 0) {
+    const resultado = factorial(numToFactorial);
+    setNum(resultado.toString());
+    setValoresClicados(`factorial(${numToFactorial}) = ${resultado}`);
+  } else {
+    // Trate o erro, pois o fatorial é definido apenas para números inteiros não negativos
+    setResultado('Erro');
+    setValoresClicados('Erro');
+  }
+}
+
+function factorial(n) {
+  if (n === 0) {
+    return 1;
+  } else {
+    return n * factorial(n - 1);
+  }
+}
+
+function trigonometricFunction(operation: 'sin' | 'cos' | 'tan') {
+  const numInRadians = (Math.PI / 180) * parseFloat(num);
+
+  let result = 0;
+
+  switch (operation) {
+    case 'sin':
+      result = Math.sin(numInRadians);
+      break;
+    case 'cos':
+      result = Math.cos(numInRadians);
+      break;
+    case 'tan':
+      result = Math.tan(numInRadians);
+      break;
+    default:
+      return;
+  }
+
+  setNum(String(result));
+  setValoresClicados(`${operation}(${num})`);
+  setResultado(String(result));
+}
+
+function inputPi(){
+  const pi = Math.PI;
+  setNum(pi.toString());
+  setValoresClicados((prevValores => prevValores + pi.toString()));
+
+}
+
+function calcularLogaritmo() {
+  let numero = parseFloat(oldnum)
+  let base = parseFloat(num)
+  return Math.log(numero) / Math.log(base);
+}
+ 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       const keyToValueMap: { [key: string]: string } = {
@@ -284,6 +324,7 @@ function BotoesBase() {
         {/* quando clicado "onClick", o botão C aciona a função clear */}
         <button className="outrosBotoes" onClick={handleParenthesis} value='('>(</button>
         <button className="outrosBotoes" onClick={handleParenthesis} value=')'>)</button>
+
         <button className='outrosBotoes' onClick={clear}>C</button>
         <button className='outrosBotoes' onClick={changeSign}>+/-</button>
         <button className='outrosBotoes' onClick={porcentage}>%</button>
@@ -293,7 +334,7 @@ function BotoesBase() {
         
         </div>
         <div className='linha'>
-        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes" onClick={() => trigonometricFunction('sin')}>sin</button>        
         <button className="outrosBotoes" onClick={operatorHandler} value='^'>^</button>
         <button className="numero" id='primNum' onClick={inputNum} value='9'>
           9
@@ -310,7 +351,7 @@ function BotoesBase() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes" onClick={() => trigonometricFunction('cos')}>cos</button>
         <button className="outrosBotoes" onClick={(raizQuadrada)}>√</button>
         <button className="numero" onClick={inputNum} value='6'>
           6
@@ -327,8 +368,8 @@ function BotoesBase() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes"></button>
-        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes" onClick={() => trigonometricFunction('tan')}>tan</button>
+        <button className="outrosBotoes" onClick={calcularLogaritmo} value='log'>log</button>
         <button className="numero" onClick={inputNum} value='3'>
           3
         </button>
@@ -344,8 +385,8 @@ function BotoesBase() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes"></button>
-        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes" onClick={() => inputPi()}>π</button>
+        <button className="outrosBotoes" onClick={calculateFactorial}>n!</button>
         <button className="numero" onClick={inputNum} value='0'>
           0
         </button>
