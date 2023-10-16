@@ -93,8 +93,9 @@ function BotoesBase() {
       resultado = String(parseFloat(oldnum) + parseFloat(num))
     }
     
+    setOldNum(num)
     if(valoresClicados.includes('%')){
-      historico.push(valoresClicados)
+      historico.push('porcentagem de '+parseFloat(oldnum)*100+ ' = '+valoresClicados)
     }else{
      historico.push(valoresClicados + ' = ' + resultado) 
     }
