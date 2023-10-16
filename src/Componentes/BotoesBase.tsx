@@ -105,6 +105,48 @@ function BotoesBase() {
     setResultado(resultado)
     setOperator('')
   }
+
+  function backspace() {
+    if (valoresClicados) {
+      // Remove o último caractere da string dos valores clicados
+      const novoValoresClicados = valoresClicados.slice(0, -1);
+  
+      // Atualiza os valores clicados e o visor
+      setValoresClicados(novoValoresClicados);
+  
+      // Se o último caractere foi um operador, remova também o operador
+      if (valoresClicados.endsWith('+') || valoresClicados.endsWith('-') || valoresClicados.endsWith('×') || valoresClicados.endsWith('÷') || valoresClicados.endsWith('^')) {
+        setOperator('');
+      }
+  
+      // Atualize o visor com o último caractere removido
+      setNum(novoValoresClicados || '0');
+    }
+  }  
+
+  function potencia() {
+    if (oldnum === '0' && num === '0') {
+      return; // Não faz nada se ambos os números forem zero
+    }
+  
+    // Calcula a potência usando a função Math.pow
+    const resultado = String(Math.pow(parseFloat(oldnum), parseFloat(num)));
+  
+    // Atualiza o visor e os valores clicados
+    setNum(resultado);
+    setValoresClicados(`${oldnum}^${num}`);
+    setOperator('');
+  
+    // Você pode escolher se deseja salvar essa operação no histórico
+    // Eu vou deixar comentado o código para salvá-lo
+    // if (oldnum !== '0') {
+    //   setHistorico(prevHistorico => [...prevHistorico, `${oldnum}^${num} = ${resultado}`]);
+    // }
+  }
+  
+  
+  
+ 
  
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -124,8 +166,7 @@ function BotoesBase() {
         'KeyA': '+',
         'KeyS': '-',
         'KeyD': '',
-        'Keyx': ''
-        
+        'Keyx': '',
       };
 
       const value = keyToValueMap[event.code];
@@ -154,11 +195,17 @@ function BotoesBase() {
         <div className="primeirosBotoes">
           <div className='linha'>
         {/* quando clicado "onClick", o botão C aciona a função clear */}
+        <button className="outrosBotoes" onClick={() => handleParenthesis("(")}>(</button>
+        <button className="outrosBotoes" onClick={() => handleParenthesis(")")}>)</button>
+
         <button className='outrosBotoes' onClick={clear}>C</button>
         <button className='outrosBotoes' onClick={changeSign}>+/-</button>
         <button className='outrosBotoes' onClick={porcentage}>%</button>
+        
         </div>
         <div className='linha'>
+        <button className="outrosBotoes" onClick={(potencia)}>^</button>
+
         <button className="numero" id='primNum' onClick={inputNum} value='9'>
           9
         </button>
@@ -198,6 +245,8 @@ function BotoesBase() {
         <button className="numero" onClick={inputNum} value={"."}>
           ,
         </button>
+        <button className='apagar' onClick={backspace}> DELETE </button> 
+
         </div>
           </div>
           <div className='ultimosBotoes'>
