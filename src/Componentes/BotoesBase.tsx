@@ -104,33 +104,23 @@ function BotoesBase() {
     if (operator === '÷') {
       //salva o resultado da divisão na variavel resultado 
       resultadoDentro = String(parseFloat((expressaoDentro.split(operator))[0]) / parseFloat((expressaoDentro.split(operator))[1]))
-   console.log('deu bom, resultadoDentro:', resultadoDentro)
    resultado = String(parseFloat(resultadoDentro)/parseFloat(num))
-   console.log('deu bom, resultado:', resultado)
     } else if (operator === '×') {
       resultadoDentro = String(parseFloat((expressaoDentro.split(operator))[0]) * parseFloat((expressaoDentro.split(operator))[1]))
-   console.log('deu bom, resultadoDentro:', resultadoDentro)
    resultado = String(parseFloat(resultadoDentro)*parseFloat(num))
-   console.log('deu bom, resultado:', resultado)
     } else if (operator === '-') {
       resultadoDentro = String(parseFloat((expressaoDentro.split(operator))[0]) - parseFloat((expressaoDentro.split(operator))[1]))
-   console.log('deu bom, resultadoDentro:', resultadoDentro)
    resultado = String(parseFloat(resultadoDentro)-parseFloat(num))
-   console.log('deu bom, resultado:', resultado)
     } else if (operator === '+') {
       resultadoDentro = String(parseFloat((expressaoDentro.split(operator))[0]) + parseFloat((expressaoDentro.split(operator))[1]))
-   console.log('deu bom, resultadoDentro:', resultadoDentro)
    resultado = String(parseFloat(resultadoDentro)+parseFloat(num))
-   console.log('deu bom, resultado:', resultado)
     } else if (operator === '^') {
     const base = parseFloat((expressaoDentro.split(operator))[0]);
     const exponent = parseFloat((expressaoDentro.split(operator))[1]);
     resultadoDentro = String(Math.pow(base, exponent))
-    console.log('deu bom, resultadoDentro:', resultadoDentro)
     const base2 = parseFloat(resultadoDentro)
     const exponent2 = parseFloat(num)
     resultado = String(Math.pow(base2, exponent2))
-    console.log('deu bom, resultado:', resultado)
     }
   } else {
     //se o operador for divisao, divide
@@ -148,6 +138,11 @@ function BotoesBase() {
     const exponent = parseFloat(num);
 
     resultado = String(Math.pow(base, exponent));
+    } else if (operator === 'log'){
+        const numero = parseFloat(oldnum)
+        const base = parseFloat(num)
+
+        resultado = String(Math.log(numero)/Math.log(base))
     }
   }
     
@@ -156,16 +151,16 @@ function BotoesBase() {
     }else if(valoresClicados.includes('!')){
       let stringOriginal =valoresClicados
 let novaString = stringOriginal.substring(0, stringOriginal.lastIndexOf('='));
-console.log(novaString);
+console.log('nova string',novaString);
 
       historico.push(novaString )
     }else{
      historico.push(valoresClicados + ' = ' + resultado) 
     }
-    console.log(historico)
+    console.log('historico',historico)
     setValoresClicados(resultado)
     setNum(resultado)
-    console.log(resultado)
+    console.log('reusltado sl',resultado)
     setResultado(resultado)
     setOperator('')
   }
@@ -200,62 +195,6 @@ console.log(novaString);
       setValoresClicados('Erro');
     }
   }
-
-  function trigonometricFunction(operation: 'sin' | 'cos' | 'tan') {
-    const numInRadians = (Math.PI / 180) * parseFloat(num);
-  
-    let result = 0;
-  
-    switch (operation) {
-      case 'sin':
-        result = Math.sin(numInRadians);
-        break;
-      case 'cos':
-        result = Math.cos(numInRadians);
-        break;
-      case 'tan':
-        result = Math.tan(numInRadians);
-        break;
-      default:
-        return;
-    }
-  
-    setNum(String(result));
-    setValoresClicados(`${operation}(${num})`);
-    setResultado(String(result));
-  }
-
-  function inputPi(){
-    const pi = Math.PI;
-    setNum(pi.toString());
-    setValoresClicados((prevValores => prevValores + pi.toString()));
-
-  }
-  
-  function calculateFactorial() {
-    const numToFactorial = parseFloat(num);
-  
-    // Verifique se o número é um inteiro não negativo
-    if (Number.isInteger(numToFactorial) && numToFactorial >= 0) {
-      const resultado = factorial(numToFactorial);
-      setNum(resultado.toString());
-      setValoresClicados(`factorial(${numToFactorial}) = ${resultado}`);
-    } else {
-      // Trate o erro, pois o fatorial é definido apenas para números inteiros não negativos
-      setResultado('Erro');
-      setValoresClicados('Erro');
-    }
-  }
-
-  function factorial(n) {
-    if (n === 0) {
-      return 1;
-    } else {
-      return n * factorial(n - 1);
-    }
-  }
-  
-  
 
   function operatorHandler(e: React.MouseEvent<HTMLButtonElement>) {
   const operatorInput = e.target.value;
@@ -328,12 +267,6 @@ function inputPi(){
   setNum(pi.toString());
   setValoresClicados((prevValores => prevValores + pi.toString()));
 
-}
-
-function calcularLogaritmo() {
-  let numero = parseFloat(oldnum)
-  let base = parseFloat(num)
-  return Math.log(numero) / Math.log(base);
 }
  
   useEffect(() => {
@@ -425,7 +358,7 @@ function calcularLogaritmo() {
         </div>
         <div className='linha'>
         <button className="outrosBotoes" onClick={() => trigonometricFunction('tan')}>tan</button>
-        <button className="outrosBotoes" onClick={calcularLogaritmo} value='log'>log</button>
+        <button className="outrosBotoes" onClick={operatorHandler} value='log'>log</button>
         <button className="numero" onClick={inputNum} value='3'>
           3
         </button>
