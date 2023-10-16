@@ -15,6 +15,18 @@ function BotoesBase() {
   const [valoresClicados, setValoresClicados] = useState('')
   const [historico, setHistorico] = useState([''])
   const [resultado, setResultado] = useState('')
+  const [parenthesisCount, setParenthesisCount] = useState(0)
+
+  function handleParenthesis(e: React.MouseEvent<HTMLButtonElement>) {
+   let parenteses = e.target.value
+    if (parenteses === '(') {
+      setParenthesisCount(parenthesisCount + 1);
+    } else if (parenteses === ')' && parenthesisCount > 0) {
+      setParenthesisCount(parenthesisCount - 1);
+    }
+  
+    setValoresClicados((prevValores) => prevValores + parenteses);
+  }
 
   //função que é ativada pelo click em algum dos numeros, o e é de event
   function inputNum(e: React.MouseEvent<HTMLButtonElement>) {
@@ -63,20 +75,6 @@ function BotoesBase() {
     setValoresClicados(resultado)
   }
 
-  //função que pega o evento click nos operadores
-  function operatorHandler(e: React.MouseEvent<HTMLButtonElement>) {
-    //a variavel operatorInput pega o valor clicado no evento
-    var operatorInput = e.target.value
-    //salva o valor do operador por use state
-    setOperator(operatorInput)
-    //transforma o numero anterior ao operador em oldNum
-    setOldNum(num)
-    //zera num para entrar o novo valor
-    setNum('0')
-    //salva o oldNum e o operador nos valores clicados para mostrar na tela
-    setValoresClicados((prevValores) => prevValores + operatorInput)
-  }
-
   //função que calcula as operações basicas de matematica
   function calculate() {
     let resultado = ''
@@ -91,11 +89,17 @@ function BotoesBase() {
       resultado = String(parseFloat(oldnum) - parseFloat(num))
     } else if (operator === '+') {
       resultado = String(parseFloat(oldnum) + parseFloat(num))
+    } else if (operator === '^') {
+      // Converte oldnum e num em números antes de calcular a potência
+    const base = parseFloat(oldnum);
+    const exponent = parseFloat(num);
+
+    // Use a função Math.pow para calcular a potência
+    resultado = String(Math.pow(base, exponent));
     }
     
-    setOldNum(num)
     if(valoresClicados.includes('%')){
-      historico.push('porcentagem de '+parseFloat(oldnum)*100+ ' = '+valoresClicados)
+      historico.push('porcentagem de '+parseFloat(num)*100+ ' = '+valoresClicados)
     }else{
      historico.push(valoresClicados + ' = ' + resultado) 
     }
@@ -125,22 +129,23 @@ function BotoesBase() {
     }
   }  
 
-  function potencia() {
+//   function potencia() {
 
-    setOldNum(num)
-
-  if (oldnum == '0' && num == '0') {
-      setResultado('0')
-      setValoresClicados(oldnum + '^'+ num)
-    }
-    // Calcula a potência usando a função Math.pow
-    const resultado = String(Math.pow(parseFloat(oldnum), parseFloat(num)));
+//   if (oldnum == '0' && num == '0') {
+//       setResultado('0')
+//       setValoresClicados(oldnum + '^'+ num)
+//     }else{
+//       if (operator === '^') {
+//         // Calcula a potência usando a função Math.pow
+//         const resultado = (Math.pow(parseFloat(oldnum), parseFloat(num))).toString();
   
-    // Atualiza o visor e os valores clicados
-    setNum(resultado);
-    setValoresClicados(oldnum+'^'+num);
-    setOperator('');
-  }
+//         // Atualiza o visor e os valores clicados
+//         setNum(resultado);
+//         setValoresClicados(oldnum + '^' + num);
+//         setOperator('');
+//       }
+//   }
+// }
   
   function raizQuadrada() {
     if (parseFloat(num) >= 0) {
@@ -159,15 +164,18 @@ function BotoesBase() {
   const operatorInput = e.target.value;
   
   if (!valoresClicados.includes('+') && 
-      !valoresClicados.includes('-') && 
       !valoresClicados.includes('×') && 
       !valoresClicados.includes('÷') && 
       !valoresClicados.includes('^')) {
     
-    setOperator(operatorInput);
-    setOldNum(num);
-    setNum('0');
-    setValoresClicados((prevValores) => prevValores + operatorInput);
+    //salva o valor do operador por use state
+    setOperator(operatorInput)
+    //transforma o numero anterior ao operador em oldNum
+    setOldNum(num)
+    //zera num para entrar o novo valor
+    setNum('0')
+    //salva o oldNum e o operador nos valores clicados para mostrar na tela
+    setValoresClicados((prevValores) => prevValores + operatorInput)
   }
 }
 
@@ -185,12 +193,7 @@ function BotoesBase() {
         'Digit0': '0',
         'Digit2': '2',
         'Digit3': '3',
-        'Period': '.',
-        'Enter': '=',
-        'KeyA': '+',
-        'KeyS': '-',
-        'KeyD': '',
-        'Keyx': '',
+        'Period': '.'
       };
 
       const value = keyToValueMap[event.code];
@@ -232,7 +235,7 @@ function BotoesBase() {
         </div>
         <div className='linha'>
         <button className="outrosBotoes"></button>
-        <button className="outrosBotoes" onClick={(potencia)}>^</button>
+        <button className="outrosBotoes" onClick={operatorHandler} value='^'>^</button>
         <button className="numero" id='primNum' onClick={inputNum} value='9'>
           9
         </button>
