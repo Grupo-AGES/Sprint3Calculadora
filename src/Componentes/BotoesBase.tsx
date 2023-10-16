@@ -183,18 +183,16 @@ console.log('nova string',novaString);
     }
   }  
   
-  function raizQuadrada() {
-    if (parseFloat(num) >= 0) {
-      const resultado = String(Math.sqrt(parseFloat(num)));
-      setNum(resultado);
-      setValoresClicados(`√${num}`);
-      setOperator('');
-    } else {
-      // Lide com erros, como tentativa de calcular a raiz de um número negativo
-      setResultado('Erro');
-      setValoresClicados('Erro');
-    }
-  }
+  // function raizQuadrada() {
+  //   let resultado = ''
+  //   const numero = parseFloat(num)
+  //   if (parseFloat(num) >= 0) {
+  //   resultado = String(Math.sqrt(numero))
+  //   }
+  //   setNum(resultado);
+  //     setValoresClicados(`√${num}`);
+  //     setOperator('');
+  // }
 
   function operatorHandler(e: React.MouseEvent<HTMLButtonElement>) {
   const operatorInput = e.target.value;
@@ -267,6 +265,12 @@ function inputPi(){
   setNum(pi.toString());
   setValoresClicados((prevValores => prevValores + pi.toString()));
 
+}
+
+function inputLn(){
+  const ln = '2,718281'
+  setNum(ln)
+  setValoresClicados((prevValores => prevValores + ln.toString()));
 }
  
   useEffect(() => {
@@ -341,7 +345,7 @@ function inputPi(){
         </div>
         <div className='linha'>
         <button className="outrosBotoes" onClick={() => trigonometricFunction('cos')}>cos</button>
-        <button className="outrosBotoes" onClick={(raizQuadrada)}>√</button>
+        <button className="outrosBotoes" onClick={inputLn}>ln</button>
         <button className="numero" onClick={inputNum} value='6'>
           6
         </button>
