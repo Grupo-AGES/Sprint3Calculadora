@@ -144,6 +144,22 @@ function BotoesBase() {
     // }
   }
   
+  function raizQuadrada() {
+    if (parseFloat(num) >= 0) {
+      const resultado = String(Math.sqrt(parseFloat(num)));
+      setNum(resultado);
+      setValoresClicados(`√${num}`);
+      setOperator('');
+    } else {
+      // Lide com erros, como tentativa de calcular a raiz de um número negativo
+      setResultado('Erro');
+      setValoresClicados('Erro');
+    }
+  }
+  
+  function indeterminado(){
+
+  }
   
   
  
@@ -201,11 +217,14 @@ function BotoesBase() {
         <button className='outrosBotoes' onClick={clear}>C</button>
         <button className='outrosBotoes' onClick={changeSign}>+/-</button>
         <button className='outrosBotoes' onClick={porcentage}>%</button>
+        <button className="operador" onClick={operatorHandler} value="×">
+          ×
+        </button>
         
         </div>
         <div className='linha'>
+        <button className="outrosBotoes" onClick={(indeterminado)}></button>
         <button className="outrosBotoes" onClick={(potencia)}>^</button>
-
         <button className="numero" id='primNum' onClick={inputNum} value='9'>
           9
         </button>
@@ -215,8 +234,14 @@ function BotoesBase() {
         <button className="numero" onClick={inputNum} value='7'>
           7
         </button>
+        <button className="operador" onClick={operatorHandler} value="÷">
+          ÷
+        </button>
+
         </div>
         <div className='linha'>
+        <button className="outrosBotoes" onClick={(indeterminado)}></button>
+        <button className="outrosBotoes" onClick={(raizQuadrada)}>√</button>
         <button className="numero" onClick={inputNum} value='6'>
           6
         </button>
@@ -226,8 +251,14 @@ function BotoesBase() {
         <button className="numero" onClick={inputNum} value='4'>
           4
         </button>
+        <button className="operador" onClick={operatorHandler} value="-">
+          -
+        </button>
+
         </div>
         <div className='linha'>
+        <button className="outrosBotoes" onClick={(indeterminado)}></button>
+        <button className="outrosBotoes" onClick={(indeterminado)}></button>
         <button className="numero" onClick={inputNum} value='3'>
           3
         </button>
@@ -237,35 +268,27 @@ function BotoesBase() {
         <button className="numero" onClick={inputNum} value='1'>
           1
         </button>
+        <button className="operador" onClick={operatorHandler} value="+">
+          +
+        </button>
+
         </div>
         <div className='linha'>
+        <button className="outrosBotoes" onClick={(indeterminado)}></button>
+        <button className="outrosBotoes" onClick={(indeterminado)}></button>
         <button className="numero" onClick={inputNum} value='0'>
           0
         </button>
         <button className="numero" onClick={inputNum} value={"."}>
           ,
         </button>
-        <button className='apagar' onClick={backspace}> DELETE </button> 
-
-        </div>
-          </div>
-          <div className='ultimosBotoes'>
-        <button className="operador" onClick={operatorHandler} value="×">
-          ×
-        </button>
-        <button className="operador" onClick={operatorHandler} value="÷">
-          ÷
-        </button>
-        <button className="operador" onClick={operatorHandler} value="-">
-          -
-        </button>
-        <button className="operador" onClick={operatorHandler} value="+">
-          +
-        </button>
+        <button className='apagar' onClick={backspace}>⌫</button> 
         <button className="igual" onClick={calculate}>
           =
         </button>
+
         </div>
+          </div>
           </div>
           </div>
       <div className='direitaBase'>
