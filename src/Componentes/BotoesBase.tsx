@@ -125,23 +125,25 @@ function BotoesBase() {
   }  
 
   function potencia() {
-    if (num === '0') {
-      // Se num for '0', não calcule nada
-      return;
+    if (oldnum === '0' && num === '0') {
+      return; // Não faz nada se ambos os números forem zero
     }
   
-    if (valoresClicados.endsWith('^')) {
-      // Se a sequência de valores termina com '^', atualize o operador
-      setOperator('^');
-      return;
-    }
+    // Calcula a potência usando a função Math.pow
+    const resultado = String(Math.pow(parseFloat(oldnum), parseFloat(num)));
   
-    // Use a função `Math.pow` para calcular a potência
-    const resultado = String(Math.pow(parseFloat(num), parseFloat(oldnum)));
+    // Atualiza o visor e os valores clicados
     setNum(resultado);
-    setValoresClicados(prevValores => prevValores + '^' + oldnum);
-    setResultado(resultado);
+    setValoresClicados(`${oldnum}^${num}`);
+    setOperator('');
+  
+    // Você pode escolher se deseja salvar essa operação no histórico
+    // Eu vou deixar comentado o código para salvá-lo
+    // if (oldnum !== '0') {
+    //   setHistorico(prevHistorico => [...prevHistorico, `${oldnum}^${num} = ${resultado}`]);
+    // }
   }
+  
   
   
  
@@ -193,6 +195,9 @@ function BotoesBase() {
         <div className="primeirosBotoes">
           <div className='linha'>
         {/* quando clicado "onClick", o botão C aciona a função clear */}
+        <button className="outrosBotoes" onClick={() => handleParenthesis("(")}>(</button>
+        <button className="outrosBotoes" onClick={() => handleParenthesis(")")}>)</button>
+
         <button className='outrosBotoes' onClick={clear}>C</button>
         <button className='outrosBotoes' onClick={changeSign}>+/-</button>
         <button className='outrosBotoes' onClick={porcentage}>%</button>
