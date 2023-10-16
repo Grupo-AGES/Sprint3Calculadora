@@ -1,5 +1,5 @@
 import './App.css'
-import Header from './Componentes/HeaderMenu'
+// import Header from './Componentes/HeaderMenu'
 import BotoesBase from './Componentes/BotoesBase'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <div className='bodyApp'>
-        <Header />
+        {/* <Header /> */}
             <BotoesBase />
         </div>
     </>
