@@ -78,6 +78,67 @@ function BotoesBase() {
   //função que calcula as operações basicas de matematica
   function calculate() {
     let resultado = ''
+    let novaExpressao = ''
+      // Encontre o índice do primeiro parêntese de abertura
+      const indiceAbertura = valoresClicados.indexOf('(');
+    if(indiceAbertura != -1) {
+      // Encontre o índice correspondente do parêntese de fechamento
+      let contadorParenteses = 1;
+      let indiceFechamento = indiceAbertura;
+      for (let i = indiceAbertura + 1; i < valoresClicados.length; i++) {
+          if (valoresClicados[i] === '(') {
+              contadorParenteses++;
+          } else if (valoresClicados[i] === ')') {
+              contadorParenteses--;
+              if (contadorParenteses === 0) {
+                  indiceFechamento = i;
+                  break;
+              }
+          }
+      }
+  
+      // Extraia a expressão dentro dos parênteses
+      const expressaoDentro = valoresClicados.substring(indiceAbertura + 1, indiceFechamento);
+      // Avalie a expressão dentro dos parênteses
+      let resultadoDentro = ''
+       //se o operador for divisao, divide
+    if (operator === '÷') {
+      //salva o resultado da divisão na variavel resultado 
+      resultadoDentro = String(parseFloat((expressaoDentro.split(operator))[0]) / parseFloat((expressaoDentro.split(operator))[1]))
+   console.log('deu bom, resultadoDentro:', resultadoDentro)
+   resultado = String(parseFloat(resultadoDentro)/parseFloat(num))
+   console.log('deu bom, resultado:', resultado)
+    } else if (operator === '×') {
+      resultadoDentro = String(parseFloat((expressaoDentro.split(operator))[0]) * parseFloat((expressaoDentro.split(operator))[1]))
+   console.log('deu bom, resultadoDentro:', resultadoDentro)
+   resultado = String(parseFloat(resultadoDentro)*parseFloat(num))
+   console.log('deu bom, resultado:', resultado)
+    } else if (operator === '-') {
+      resultadoDentro = String(parseFloat((expressaoDentro.split(operator))[0]) - parseFloat((expressaoDentro.split(operator))[1]))
+   console.log('deu bom, resultadoDentro:', resultadoDentro)
+   resultado = String(parseFloat(resultadoDentro)-parseFloat(num))
+   console.log('deu bom, resultado:', resultado)
+    } else if (operator === '+') {
+      resultadoDentro = String(parseFloat((expressaoDentro.split(operator))[0]) + parseFloat((expressaoDentro.split(operator))[1]))
+   console.log('deu bom, resultadoDentro:', resultadoDentro)
+   resultado = String(parseFloat(resultadoDentro)+parseFloat(num))
+   console.log('deu bom, resultado:', resultado)
+    } else if (operator === '^') {
+    const base = parseFloat((expressaoDentro.split(operator))[0]);
+    const exponent = parseFloat((expressaoDentro.split(operator))[1]);
+    resultadoDentro = String(Math.pow(base, exponent))
+    console.log('deu bom, resultadoDentro:', resultadoDentro)
+    const base2 = parseFloat(resultadoDentro)
+    const exponent2 = parseFloat(num)
+    resultado = String(Math.pow(base2, exponent2))
+    console.log('deu bom, resultado:', resultado)
+    }
+    //   // Substitua a expressão entre parênteses pelo resultado na expressão original
+    //  novaExpressao = valoresClicados.substring(0, indiceAbertura) + resultadoDentro + valoresClicados.substring(indiceFechamento + 1);
+  
+    //   // Avalie a expressão resultante
+    //    resultado = eval(novaExpressao);
+  } else {
    
     //se o operador for divisao, divide
     if (operator === '÷') {
@@ -90,13 +151,12 @@ function BotoesBase() {
     } else if (operator === '+') {
       resultado = String(parseFloat(oldnum) + parseFloat(num))
     } else if (operator === '^') {
-      // Converte oldnum e num em números antes de calcular a potência
     const base = parseFloat(oldnum);
     const exponent = parseFloat(num);
 
-    // Use a função Math.pow para calcular a potência
     resultado = String(Math.pow(base, exponent));
     }
+  }
     
     if(valoresClicados.includes('%')){
       historico.push('porcentagem de '+parseFloat(num)*100+ ' = '+valoresClicados)
@@ -163,10 +223,10 @@ function BotoesBase() {
   function operatorHandler(e: React.MouseEvent<HTMLButtonElement>) {
   const operatorInput = e.target.value;
   
-  if (!valoresClicados.includes('+') && 
-      !valoresClicados.includes('×') && 
-      !valoresClicados.includes('÷') && 
-      !valoresClicados.includes('^')) {
+  // if (!valoresClicados.includes('+') && 
+  //     !valoresClicados.includes('×') && 
+  //     !valoresClicados.includes('÷') && 
+  //     !valoresClicados.includes('^')) {
     
     //salva o valor do operador por use state
     setOperator(operatorInput)
@@ -176,7 +236,7 @@ function BotoesBase() {
     setNum('0')
     //salva o oldNum e o operador nos valores clicados para mostrar na tela
     setValoresClicados((prevValores) => prevValores + operatorInput)
-  }
+  // }
 }
 
   
@@ -222,9 +282,8 @@ function BotoesBase() {
         <div className="primeirosBotoes">
           <div className='linha'>
         {/* quando clicado "onClick", o botão C aciona a função clear */}
-        <button className="outrosBotoes" onClick={() => handleParenthesis("(")}>(</button>
-        <button className="outrosBotoes" onClick={() => handleParenthesis(")")}>)</button>
-
+        <button className="outrosBotoes" onClick={handleParenthesis} value='('>(</button>
+        <button className="outrosBotoes" onClick={handleParenthesis} value=')'>)</button>
         <button className='outrosBotoes' onClick={clear}>C</button>
         <button className='outrosBotoes' onClick={changeSign}>+/-</button>
         <button className='outrosBotoes' onClick={porcentage}>%</button>
