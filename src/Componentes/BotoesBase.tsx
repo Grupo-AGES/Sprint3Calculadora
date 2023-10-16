@@ -153,6 +153,23 @@ function BotoesBase() {
       setValoresClicados('Erro');
     }
   }
+
+  function operatorHandler(e: React.MouseEvent<HTMLButtonElement>) {
+  const operatorInput = e.target.value;
+  
+  if (!valoresClicados.includes('+') && 
+      !valoresClicados.includes('-') && 
+      !valoresClicados.includes('×') && 
+      !valoresClicados.includes('÷') && 
+      !valoresClicados.includes('^')) {
+    
+    setOperator(operatorInput);
+    setOldNum(num);
+    setNum('0');
+    setValoresClicados((prevValores) => prevValores + operatorInput);
+  }
+}
+
   
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
