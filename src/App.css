@@ -25,6 +25,7 @@
   display: flex;
   flex-direction: row;
   padding-top: 17px;
+  padding-left: 170px;
 }
 
 .primeirosBotoes {
@@ -123,7 +124,7 @@
   line-height: normal;
 }
 
-.valoresClicados {
+.valoresClicados { 
   flex-shrink: 0;
   border-radius: 15px;
   background: #A8A8A8;
@@ -133,6 +134,8 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  border: 1px solid #ccc;
+
 }
 
 .direitaBase {
