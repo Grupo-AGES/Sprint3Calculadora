@@ -285,7 +285,7 @@ function BotoesBase() {
         <Resultado resultado={resultado} />
         <div className="historico">
         <Historico historico={historico} />
-        <button onClick={clearHistory} className='lixo'>Limpar histórico</button>
+        <button onClick={clearHistory} className='lixo'>🗑️</button>
       </div>
       </div>
     </div>
