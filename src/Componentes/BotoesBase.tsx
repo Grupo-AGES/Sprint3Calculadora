@@ -198,7 +198,6 @@ function BotoesBase() {
   
   if (!valoresClicados.includes('+') && 
       !valoresClicados.includes('×') &&
-      !valoresClicados.includes('-') && 
       !valoresClicados.includes('÷') && 
       !valoresClicados.includes('^')) {
     
