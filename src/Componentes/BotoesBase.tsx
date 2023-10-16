@@ -160,11 +160,45 @@ function BotoesBase() {
     }
   }
 
+  function trigonometricFunction(operation: 'sin' | 'cos' | 'tan') {
+    const numInRadians = (Math.PI / 180) * parseFloat(num);
+  
+    let result = 0;
+  
+    switch (operation) {
+      case 'sin':
+        result = Math.sin(numInRadians);
+        break;
+      case 'cos':
+        result = Math.cos(numInRadians);
+        break;
+      case 'tan':
+        result = Math.tan(numInRadians);
+        break;
+      default:
+        return;
+    }
+  
+    setNum(String(result));
+    setValoresClicados(`${operation}(${num})`);
+    setResultado(String(result));
+  }
+
+  function inputPi(){
+    const pi = Math.PI;
+    setNum(pi.toString());
+    setValoresClicados((prevValores => prevValores + pi.toString()));
+
+  }
+  
+  
+
   function operatorHandler(e: React.MouseEvent<HTMLButtonElement>) {
   const operatorInput = e.target.value;
   
   if (!valoresClicados.includes('+') && 
-      !valoresClicados.includes('×') && 
+      !valoresClicados.includes('×') &&
+      !valoresClicados.includes('-') && 
       !valoresClicados.includes('÷') && 
       !valoresClicados.includes('^')) {
     
@@ -234,7 +268,7 @@ function BotoesBase() {
         
         </div>
         <div className='linha'>
-        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes" onClick={() => trigonometricFunction('sin')}>sin</button>        
         <button className="outrosBotoes" onClick={operatorHandler} value='^'>^</button>
         <button className="numero" id='primNum' onClick={inputNum} value='9'>
           9
@@ -251,7 +285,7 @@ function BotoesBase() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes" onClick={() => trigonometricFunction('cos')}>cos</button>
         <button className="outrosBotoes" onClick={(raizQuadrada)}>√</button>
         <button className="numero" onClick={inputNum} value='6'>
           6
@@ -268,7 +302,7 @@ function BotoesBase() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes" onClick={() => trigonometricFunction('tan')}>tan</button>
         <button className="outrosBotoes"></button>
         <button className="numero" onClick={inputNum} value='3'>
           3
@@ -285,7 +319,7 @@ function BotoesBase() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes" onClick={() => inputPi()}>π</button>
         <button className="outrosBotoes"></button>
         <button className="numero" onClick={inputNum} value='0'>
           0
