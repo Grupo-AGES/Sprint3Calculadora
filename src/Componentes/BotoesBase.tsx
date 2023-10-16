@@ -125,23 +125,20 @@ function BotoesBase() {
   }  
 
   function potencia() {
-    if (oldnum === '0' && num === '0') {
-      return; // Não faz nada se ambos os números forem zero
+
+    setOldNum(num)
+
+  if (oldnum == '0' && num == '0') {
+      setResultado('0')
+      setValoresClicados(oldnum + '^'+ num)
     }
-  
     // Calcula a potência usando a função Math.pow
     const resultado = String(Math.pow(parseFloat(oldnum), parseFloat(num)));
   
     // Atualiza o visor e os valores clicados
     setNum(resultado);
-    setValoresClicados(`${oldnum}^${num}`);
+    setValoresClicados(oldnum+'^'+num);
     setOperator('');
-  
-    // Você pode escolher se deseja salvar essa operação no histórico
-    // Eu vou deixar comentado o código para salvá-lo
-    // if (oldnum !== '0') {
-    //   setHistorico(prevHistorico => [...prevHistorico, `${oldnum}^${num} = ${resultado}`]);
-    // }
   }
   
   function raizQuadrada() {
@@ -157,13 +154,6 @@ function BotoesBase() {
     }
   }
   
-  function indeterminado(){
-
-  }
-  
-  
- 
- 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       const keyToValueMap: { [key: string]: string } = {
@@ -223,7 +213,7 @@ function BotoesBase() {
         
         </div>
         <div className='linha'>
-        <button className="outrosBotoes" onClick={(indeterminado)}></button>
+        <button className="outrosBotoes"></button>
         <button className="outrosBotoes" onClick={(potencia)}>^</button>
         <button className="numero" id='primNum' onClick={inputNum} value='9'>
           9
@@ -240,7 +230,7 @@ function BotoesBase() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes" onClick={(indeterminado)}></button>
+        <button className="outrosBotoes"></button>
         <button className="outrosBotoes" onClick={(raizQuadrada)}>√</button>
         <button className="numero" onClick={inputNum} value='6'>
           6
@@ -257,8 +247,8 @@ function BotoesBase() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes" onClick={(indeterminado)}></button>
-        <button className="outrosBotoes" onClick={(indeterminado)}></button>
+        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes"></button>
         <button className="numero" onClick={inputNum} value='3'>
           3
         </button>
@@ -274,8 +264,8 @@ function BotoesBase() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes" onClick={(indeterminado)}></button>
-        <button className="outrosBotoes" onClick={(indeterminado)}></button>
+        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes"></button>
         <button className="numero" onClick={inputNum} value='0'>
           0
         </button>
@@ -293,8 +283,10 @@ function BotoesBase() {
           </div>
       <div className='direitaBase'>
         <Resultado resultado={resultado} />
+        <div className="historico">
         <Historico historico={historico} />
         <button onClick={clearHistory} className='lixo'>Limpar histórico</button>
+      </div>
       </div>
     </div>
   )
