@@ -191,6 +191,29 @@ function BotoesBase() {
 
   }
   
+  function calculateFactorial() {
+    const numToFactorial = parseFloat(num);
+  
+    // Verifique se o número é um inteiro não negativo
+    if (Number.isInteger(numToFactorial) && numToFactorial >= 0) {
+      const resultado = factorial(numToFactorial);
+      setNum(resultado.toString());
+      setValoresClicados(`factorial(${numToFactorial}) = ${resultado}`);
+    } else {
+      // Trate o erro, pois o fatorial é definido apenas para números inteiros não negativos
+      setResultado('Erro');
+      setValoresClicados('Erro');
+    }
+  }
+
+  function factorial(n) {
+    if (n === 0) {
+      return 1;
+    } else {
+      return n * factorial(n - 1);
+    }
+  }
+  
   
 
   function operatorHandler(e: React.MouseEvent<HTMLButtonElement>) {
@@ -319,7 +342,7 @@ function BotoesBase() {
         </div>
         <div className='linha'>
         <button className="outrosBotoes" onClick={() => inputPi()}>π</button>
-        <button className="outrosBotoes"></button>
+        <button className="outrosBotoes" onClick={calculateFactorial}>n!</button>
         <button className="numero" onClick={inputNum} value='0'>
           0
         </button>
