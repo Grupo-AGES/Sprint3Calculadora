@@ -391,7 +391,6 @@ function calcularLogaritmo() {
         </div>
         <div className='linha'>
         <button className="outrosBotoes" onClick={() => trigonometricFunction('sin')}>sin</button>        
-        <button className="outrosBotoes" onClick={() => trigonometricFunction('sin')}>sin</button>        
         <button className="outrosBotoes" onClick={operatorHandler} value='^'>^</button>
         <button className="numero" id='primNum' onClick={inputNum} value='9'>
           9
@@ -408,7 +407,6 @@ function calcularLogaritmo() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes" onClick={() => trigonometricFunction('cos')}>cos</button>
         <button className="outrosBotoes" onClick={() => trigonometricFunction('cos')}>cos</button>
         <button className="outrosBotoes" onClick={(raizQuadrada)}>√</button>
         <button className="numero" onClick={inputNum} value='6'>
@@ -443,8 +441,6 @@ function calcularLogaritmo() {
 
         </div>
         <div className='linha'>
-        <button className="outrosBotoes" onClick={() => inputPi()}>π</button>
-        <button className="outrosBotoes" onClick={calculateFactorial}>n!</button>
         <button className="outrosBotoes" onClick={() => inputPi()}>π</button>
         <button className="outrosBotoes" onClick={calculateFactorial}>n!</button>
         <button className="numero" onClick={inputNum} value='0'>
