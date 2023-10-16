@@ -5,23 +5,6 @@
   width: 100%;
 }
 
-.bodyHeader {
-  width: 100vw;
-  height: 90px;
-  flex-shrink: 0;
-  background: #BEBEBE;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.menuLateral {
-  color: #000;
-  font-family: Inter;
-  font-size: 50px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
 .bodyBase {
   display: flex;
   flex-direction: row;
@@ -30,7 +13,7 @@
 }
 
 .bodyBotoes {
-  width: 50%;
+  width: 60vw;
   height: 90vh;
   flex: 1;
   display: flex;
@@ -41,6 +24,7 @@
 .todosBotoes {
   display: flex;
   flex-direction: row;
+  padding-top: 17px;
 }
 
 .primeirosBotoes {
@@ -69,8 +53,8 @@
 }
 
 .apagar{
-  width: 116px;
-  height: 116px;
+  width: 150px;
+  height: 150px;
   flex-shrink: 0;
   border-radius: 10px;
   background: #65805C;
@@ -83,8 +67,8 @@
 }
 
 .numero {
-  width: 116px;
-  height: 116px;
+  width: 150px;
+  height: 150px;
   flex-shrink: 0;
   border-radius: 10px;
   background: #65805C;
@@ -97,8 +81,8 @@
 }
 
 .operador {
-  width: 116px;
-  height: 116px;
+  width: 150px;
+  height: 150px;
   flex-shrink: 0;
   border-radius: 10px;
   background: #132226;
@@ -112,8 +96,8 @@
 
 .igual {
   align-content: center;
-  width: 116px;
-  height: 116px;
+  width: 150px;
+  height: 150px;
   flex-shrink: 0;
   background: #DAA520;
   border-color: #FFF;
@@ -126,8 +110,8 @@
 }
 
 .outrosBotoes {
-  width: 116px;
-  height: 116px;
+  width: 150px;
+  height: 150px;
   flex-shrink: 0;
   border-radius: 10px;
   background: #294249;
@@ -154,17 +138,18 @@
 .direitaBase {
   flex-shrink: 0;
   background: #BEBEBE;
-  width: 50%;
 }
 
 .tituloResultado {
   width: 138px;
   color: #000;
   font-family: Inter;
-  font-size: 25px;
+  font-size: 45px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  padding-left: 25px;
+  padding-top: 5.5%;
+  padding-bottom: 0%;
 }
 
 .resultado {
@@ -173,12 +158,12 @@
   font-size: 60px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  padding-left: 25px;
+  padding-top: 0px;
 }
 
 .tituloHistorico {
-  padding: 15px;
-  height: 40px;
+  height: 5px;
   flex-shrink: 0;
   border-radius: 10px 10px 0px 0px;
   width: 150px;
@@ -187,12 +172,14 @@
   font-size: 25px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  padding-top: 10px;
+  padding-left: 25px;
+
 }
 
 .historico {
-  width: 50vw;
-  height: 100%;
+  width: 34vw;
+  height: 73vh;
   flex-shrink: 0;
   background: #A8A8A8;
 }
@@ -200,10 +187,11 @@
 .itensHistorico {
   color: #424242;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 25px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  padding-left: 25px;
+  padding-top: 25px;
 }
 
 .itemHistorico {
@@ -211,6 +199,11 @@
 }
 
 .lixo {
-  size: 25px;
+  height: 150px;
+  width: 150px;
+  font-size: 40px;
+  background-color: #A8A8A8;
+  border-radius: 0%;
+  margin-top: 473px;
+  margin-left: 545px;
 }
-
